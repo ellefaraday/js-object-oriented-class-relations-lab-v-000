@@ -18,20 +18,11 @@ class Driver {
   }
 
   passengers(){
-    let passengerIds = this.trips().map(
+    return this.trips().map(
       function (trip){
-        return trip.passengerId;
-      })
-
-    let passengers = []
-    passengerIds.forEach(
-      function (id) {
-        passengers.push(store.passengers.find(
-          function (passenger) {return passenger.id === id}
-        )
-      )}
+        return trip.passenger();
+      }.bind(this)
     )
-    return passengers
   }
 }
 
@@ -51,22 +42,12 @@ class Passenger {
   }
 
   drivers(){
-    let driverIds = this.trips().map(
+    return this.trips().map(
       function (trip){
-        return trip.driverId;
+        return trip.driver();
       })
-
-    let drivers = []
-    driverIds.forEach(
-      function (id) {
-        drivers.push(store.drivers.find(
-          function (driver) {return driver.id === id}
-        )
-      )}
-    )
-    return drivers
   }
-  
+
 }
 
 class Trip {
